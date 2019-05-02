@@ -1,2 +1,2 @@
 # dotfile
-My dot file
+My dot files
