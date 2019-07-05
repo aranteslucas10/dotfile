@@ -44,9 +44,14 @@ Plug 'fenetikm/falcon'
 " Plug 'fholgado/minibufexpl.vim'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'romgrk/winteract.vim'
-Plug 'muansari96/vimify'
+" Plug 'muansari96/vimify'
 Plug 'itchyny/lightline.vim' 
 Plug 'scrooloose/nerdtree' 
+Plug 'w0rp/ale'
+Plug 'jceb/vim-orgmode'
+Plug 'vimwiki/vimwiki'
+Plug 'ActivityWatch/aw-watcher-vim'
+Plug 'tpope/vim-surround'
 call plug#end()
 " colorscheme dracula
 " colorscheme industry
@@ -69,11 +74,13 @@ set guioptions-=L  "remove left-hand scroll bar
 
 " Spotify map
 map <Leader>s :SpToggle<CR>
+map <Leader>p :SpPause<CR>
+map <Leader>pp :SpPlay<CR>
 
 let g:lightline = {
 			\'colorscheme': 'molokai',
 			\'active': {
-			\     'left': [ [ 'mode', 'filename', 'paste' ], [ 'status_case' ] ]
+			\     'left': [ [ 'readonly', 'filename', 'modified' ], [ 'mode', 'paste' ], [ 'status_case' ] ]
 			\},
 			\'component_function': {
 			\ 'status_case': 'StatusCase',
@@ -86,4 +93,36 @@ let g:minha_variavel_global = ""
 
 " NERDtree configurações
 map <leader>e :NERDTreeToggle<CR>
+let NERDTreeIgnore=['\.pyc$', '\.vim$', '\~$']
+":let arquivo=expand('%') | w | bd | exec "!gvim" arquivo<CR>
 
+" " Better terminal
+" tnoremap :: <C-w>:
+" tnoremap <C-Esc> <C-w>N
+" " Tmux like
+" tmap     <silent> <C-b>% ::vertical terminal<CR>
+" nnoremap <silent> <Leader><C-b>% :vertical terminal<CR>
+" tmap     <silent> <C-b>" ::terminal<CR>
+" nnoremap <silent> <Leader><C-b>" :silent  terminal<CR>
+" tmap     <silent> <C-b>c ::tab terminal<CR>
+" nnoremap <silent> <Leader><C-b>c :tab terminal<CR>
+" tmap     <silent> <C-b>n ::tabnext<CR>
+" tmap     <silent> <C-b>p ::tabprevious<CR>
+" " Resize when changing to normal mode, so no wrap
+" fu! ResizeTerminalForNormalMode()
+"     let b:terminal_mode_columns = term_getsize('%')[1]
+"     let l:terminal_current_line = line("$")
+"     let l:size_to_increase      = max([strlen(l:terminal_current_line), 3]) + 1
+"     let l:new_window_width      = b:terminal_mode_columns + l:size_to_increase
+"     execute 'vertical resize' l:new_window_width
+" endfu
+
+" fu! RestoreTerminalForInsertMode()
+"     execute 'vertical resize' b:terminal_mode_columns
+" endfu
+
+" augroup BetterTerminal
+"     autocmd!
+"     autocmd CursorMoved  * if &buftype == 'terminal' && mode() == 'n' | call ResizeTerminalForNormalMode()| endif
+"     autocmd TerminalOpen * nnoremap <buffer> <silent> i :call RestoreTerminalForInsertMode()<CR>i
+" augroup end
